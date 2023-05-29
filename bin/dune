@@ -1,0 +1,5 @@
+(executable
+ (public_name personal_site)
+ (name main)
+ (preprocess (pps lwt_ppx))
+ (libraries personal_site hx core dream tyxml))

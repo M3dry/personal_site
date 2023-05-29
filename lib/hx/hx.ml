@@ -1,0 +1,17 @@
+let string_attrib = Tyxml.Html.Unsafe.string_attrib
+let get link = string_attrib "hx-get" link
+let post link = string_attrib "hx-post" link
+let put link = string_attrib "hx-put" link
+let delete link = string_attrib "hx-delete" link
+let target link = string_attrib "hx-target" link
+let swap text = string_attrib "hx-swap" text
+let swap_oob text = string_attrib "hx-swap-oob" text
+let select text = string_attrib "hx-select" text
+let trigger text = string_attrib "hx-trigger" text
+let sync text = string_attrib "hx-sync" text
+let params text = string_attrib "hx-params" text
+let vals text = string_attrib "hx-vals" text
+let encoding text = string_attrib "hx-encoding" text
+let confirm text = string_attrib "hx-confirm" text
+let boost text = string_attrib "hx-boost" text
+let preserve () = string_attrib "hx-preserve" "true"
