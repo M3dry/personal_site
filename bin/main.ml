@@ -51,6 +51,8 @@ let () =
                     ; div ~a:[ Hx.get "/util/knowledge"; Hx.trigger "load" ] []
                     ]
                 ]))
+       ; Dream.get "/index" (fun _ ->
+           Dream.html @@ Personal_site.template_to_html "index" @@ `O [ "name", `String "M3dry" ])
        ; Dream.get "/util/navbar" (fun _ ->
            Dream.html
            @@ html_to_string

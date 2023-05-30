@@ -1,2 +1,3 @@
 (library
- (name personal_site))
+ (name personal_site)
+ (libraries core mustache))

@@ -12,9 +12,10 @@ bug-reports: "https://github.com/username/reponame/issues"
 depends: [
   "ocaml"
   "dune" {>= "3.7"}
+  "core"
   "dream"
   "tyxml"
-  "core"
+  "mustache"
   "odoc" {with-doc}
 ]
 build: [
