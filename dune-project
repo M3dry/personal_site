@@ -19,7 +19,7 @@
  (name personal_site)
  (synopsis "A short synopsis")
  (description "A longer description")
- (depends ocaml dune core dream tyxml mustache)
+ (depends ocaml dune core dream tyxml jingoo)
  (tags
   (topics "to describe" your project)))
 

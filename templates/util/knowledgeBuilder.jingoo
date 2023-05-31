@@ -1,0 +1,11 @@
+<div class="flex gap-5px justify-center">
+{% for icon in icons %}
+    <button>
+        {%- if icon.path -%}
+            <img class="bg-my-blue radius-md aspect-square p-5px min-w-[3.5rem]" src="{{ icon.path }}{{ icon.name }}.svg" alt="{{ icon.alt_name }} icon"/>
+        {%- else %}
+            <img class="bg-my-blue rounded-md aspect-square p-5px min-w-[3.5rem]" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/{{ icon.name }}.svg" alt="{{ icon.alt_name }} icon"/>
+        {%- endif -%}
+    </button>
+{% endfor %}
+</div>

@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/static/out.css" rel="stylesheet">
+        <link href="https://mshaugh.github.io/nerdfont-webfonts/build/ubuntu-nerd-font.css" rel="stylesheet">
+        <script src="/static/htmx.min.js"></script>
+    </head>
+    <body class="bg-my-black text-my-white font-ubuntu m-0">
+        {% block body %}{% endblock %}
+    </body>
+</html>

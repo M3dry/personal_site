@@ -1,6 +1,4 @@
-let template_to_html fs_name json_o =
-  let lines = Arg.read_arg @@ "./templates/" ^ fs_name ^ ".html" in
-  let str = Core.Array.fold lines ~init:"" ~f:(fun acc line -> acc ^ "\n" ^ line) in
-  let open Mustache in
-  render (of_string str) json_o
+let template_to_html fs_name models =
+  let open Jingoo in
+  Jg_template.from_file ("./templates/" ^ fs_name ^ ".jingoo") ~models
 ;;

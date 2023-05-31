@@ -1,0 +1,6 @@
+<div class="text-right font-2xl my-2.5 mx-5px">
+    {% for link in links %}
+    <a class="no-underline font-bold color-my-white p-5px hover:bg-my-purple hover:rounded-md" href="{{ link.path }}"
+        title="{{ link.title }}">{{ link.name }}</a>
+    {% endfor %}
+</div>
