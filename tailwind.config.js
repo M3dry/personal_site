@@ -7,11 +7,12 @@ module.exports = {
     },
     extend: {
       colors: {
-        "my-black": "#0f111b",
         "my-purple": "#c792ea",
         "my-red": "#ff5370",
         "my-blue": "#72a4ff",
+        "my-gray": "#292d3e",
         "my-white": "#eeffff",
+        "my-black": "#0f111b",
       },
       spacing: {
         "5px": "5px",

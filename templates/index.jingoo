@@ -3,7 +3,7 @@
 {% block main %}
 <div hx-get="/util/navbar" hx-trigger="load" hx-swap="outerHTML"></div>
 <div id="knowledge">
-  <h1 class="text-6xl text-center">Knowledge</h1>
+  <h1 class="text-6xl font-bold text-center text-my-red">Knowledge</h1>
   <div hx-get="/util/knowledge" hx-trigger="load" hx-swap="outerHTML"></div>
 </div>
 {% endblock %}

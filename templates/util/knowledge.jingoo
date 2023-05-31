@@ -1,7 +1,7 @@
 <div>
 {% for knowledge in knowledges %}
     <div>
-        <h2 class="text-center text-3xl">{{ knowledge.name }}</h2>
+        <h2 class="text-center font-bold text-3xl text-my-purple">{{ knowledge.name }}</h2>
         <div hx-get="/util/knowledge/{{ knowledge.path }}" hx-trigger="load" hx-swap="outerHTML"></div>
     </div>
 {% endfor %}
