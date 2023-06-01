@@ -1,8 +1,45 @@
-<div>
-{% for knowledge in knowledges %}
-    <div>
-        <h2 class="text-center font-bold text-3xl text-my-purple">{{ knowledge.name }}</h2>
-        <div hx-get="/util/knowledge/{{ knowledge.path }}" hx-trigger="load" hx-swap="outerHTML"></div>
+{% macro build(icons) -%}
+    <div class="flex gap-5px justify-center">
+        {% for icon in icons %}
+            {%- if icon.click %}
+                <button _="on click send clickety(clicker : '{{ icon.name }}') to next .info"
+                        hx-get="{{ icon.click }}" hx-target="next .info">
+            {% else %}
+                <a href="{{ icon.link }}">
+            {% endif -%}
+
+                <img class="bg-my-white rounded-md aspect-square p-5px min-w-[3.5rem] hover:bg-my-purple"
+                     src="{{ default('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/', icon.path) }}{{ icon.name }}.svg"
+                     alt="{{ icon.alt_name }} icon"/>
+
+            {%- if icon.click %}
+                </button>
+            {% else %}
+                </a>
+            {% endif -%}
+        {% endfor %}
     </div>
-{% endfor %}
+    <div _="init set :last to '' then set :addhide to false
+            on htmx:afterSwap
+                if not :addhide
+                    remove .hidden from me
+                else
+                    set :addhide to false end
+            on clickety(clicker)
+                if :last is clicker
+                    set :addhide to true
+                    add .hidden to me
+                    set :last to ''
+                else
+                    set :last to clicker"
+        class="hidden min-w-max p-5px bg-my-gray rounded-md info"></div>
+{%- endmacro %}
+
+<div class="flex inset-x-0 mx-auto justify-center">
+    {% for knowledge in knowledges %}
+        <div class="bg-my-gray m-5px p-5px w-fit h-fit rounded-md">
+            <h2 class="text-center font-bold text-3xl text-my-purple">{{ knowledge.name }}</h2>
+            {{ build(knowledge.icons) }}
+        </div>
+    {% endfor %}
 </div>

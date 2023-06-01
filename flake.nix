@@ -17,23 +17,23 @@
       on = opam-nix.lib.${system};
       scope =
         on.buildOpamProject {} package ./. {ocaml-base-compiler = "*";};
-      overlay = final: prev: let
-        inherit (prev.personal_site) buildPhase buildInputs;
-      in {
-        personal_site = prev.personal_site.override {
+      overlay = final: prev: {
+        personal_site = prev.personal_site.overrideAttrs (oldAttrs: rec {
           preBuild = ''
             tailwindcss -o ./static/out.css
           '';
-          buildInputs = [pkgs.nodePackages_latest.tailwindcss] ++ buildInputs;
+          buildInputs = [pkgs.nodePackages_latest.tailwindcss] ++ oldAttrs.buildInputs;
           preInstall = ''
-          mkdir -p $out
-          cp -r ./static $out/
+            mkdir -p $out
+            cp -r ./static $out/
           '';
-        };
+        });
       };
     in {
       legacyPackages = scope.overrideScope' overlay;
 
       packages.default = self.legacyPackages.${system}.${package};
+      devShell = with opam-nix.inputs.nixpkgs.legacyPackages.${system};
+        mkShell {inherit (self.legacyPackages.${system}.${package}) buildInputs;};
     });
 }

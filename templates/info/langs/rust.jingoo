@@ -1,0 +1,4 @@
+{% import "./templates/util/skills.jingoo" as skills %}
+
+{{ header("Rust", "https://rust-lang.org") }}
+<p>I like rust</p>

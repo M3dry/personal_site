@@ -1,7 +1,0 @@
-<div class="flex gap-5px justify-center">
-{% for icon in icons %}
-    <button>
-        <img class="bg-my-white rounded-md aspect-square p-5px min-w-[3.5rem]" src="{{ default('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/', icon.path) }}{{ icon.name }}.svg" alt="{{ icon.alt_name }} icon"/>
-    </button>
-{% endfor %}
-</div>
