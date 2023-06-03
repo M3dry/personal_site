@@ -1,4 +1,1 @@
-{% import "./templates/util/skills.jingoo" as skills %}
-
-{{ header("Neovim", "https://neovim.io") }}
 <p>Neovim is my IDE</p>

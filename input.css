@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    a {
+        @apply underline hover:text-my-purple
+    }
+}
+
+@layer components {
+    .navbar-link {
+        @apply no-underline py-0.5 px-1 hover:rounded-md hover:bg-my-purple hover:text-my-black text-center font-bold
+    }
+
+    .skill-heading {
+        @apply navbar-link text-xl text-my-blue
+    }
+}

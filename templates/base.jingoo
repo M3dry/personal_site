@@ -1,13 +1,16 @@
-<html>
+<!DOCTYPE html>
+<html _="on click(event) add .hidden to .info" class="dark" lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Personal website of M3dry">
+        <title>M3dry</title>
         <link href="/static/out.css" rel="stylesheet">
         <link href="https://mshaugh.github.io/nerdfont-webfonts/build/ubuntu-nerd-font.css" rel="stylesheet">
-        <script src="/static/htmx.min.js"></script>
-        <script src="https://unpkg.com/hyperscript.org@0.9.8"></script>
+        <!-- <script src="/static/htmx.min.js"></script> -->
+        <script async src="https://unpkg.com/hyperscript.org@0.9.8"></script>
     </head>
-    <body class="bg-my-black text-my-white font-ubuntu m-0">
+    <body class="bg-my-white dark:bg-my-black text-my-black dark:text-my-white font-ubuntu m-0">
         {% block body %}{% endblock %}
     </body>
 </html>

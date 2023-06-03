@@ -1,4 +1,1 @@
-{% import "./templates/util/skills.jingoo" as skills %}
-
-{{ header("OCaml", "https://ocaml.org") }}
 <p>This website is built with OCaml and HTMX</p>

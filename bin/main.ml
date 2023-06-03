@@ -1,7 +1,48 @@
+let link name path =
+  let open Jingoo.Jg_types in
+  Tobj [ "name", Tstr name; "path", Tstr path ]
+;;
+
+let knowledge name icons =
+  let open Jingoo.Jg_types in
+  Tobj [ "name", Tstr name; "icons", Tlist icons ]
+;;
+
+type icon_behaviour =
+  | Click of
+      { link : string
+      ; path : string
+      ; name : string
+      }
+  | Link of string
+
+let click link path name = Click { name; link; path }
+
+let icon ?path name alt_name behaviour =
+  let open Jingoo.Jg_types in
+  let list =
+    [ "name", Tstr name
+    ; "alt_name", Tstr alt_name
+    ; (match behaviour with
+       | Click { name; link; path } ->
+         ( "click"
+         , Tstr
+             (Personal_site.template_to_html
+                "util/skills"
+                [ "name", Tstr name
+                ; "link", Tstr link
+                ; "path", Tstr ("./templates/info/" ^ path ^ ".jingoo")
+                ]) )
+       | Link link -> "link", Tstr link)
+    ]
+  in
+  Tobj
+    (match path with
+     | Some path -> ("path", Tstr path) :: list
+     | None -> list)
+;;
+
 let () =
-  (* if Array.length Sys.argv != 0 *)
-  (* then Printf.printf "\n%s@.\n" @@ Personal_site.template_to_html "index"  *)
-  (* else *)
   Dream.run
   @@ Dream.logger
   @@ Dream.router
@@ -12,72 +53,37 @@ let () =
                 "index"
                 [ ( "links"
                   , Tlist
-                      [ Tobj
-                          [ "path", Tstr "https://github.com/m3dry"
-                          ; "title", Tstr "Github - M3dry"
-                          ; "name", Tstr "Github"
-                          ]
-                      ; Tobj
-                          [ "path", Tstr "https://youtube.com/@m3dry"
-                          ; "title", Tstr "Youtube - M3dry"
-                          ; "name", Tstr "Youtube"
-                          ]
-                      ; Tobj
-                          [ "path", Tstr "/blog"
-                          ; "title", Tstr "Blog"
-                          ; "name", Tstr "Blog"
-                          ]
+                      [ link "Github" "https://github.com"
+                      ; link "Youtube" "https://youtube.com/@m3dry"
+                      ; link "Blog" "/blog"
                       ] )
                 ; ( "knowledges"
                   , Tlist
-                      [ Tobj
-                          [ "name", Tstr "Programming languages"
-                          ; ( "icons"
-                            , Tlist
-                                [ Tobj
-                                    [ "name", Tstr "rust/rust-plain"
-                                    ; "alt_name", Tstr "Rust"
-                                    ; "click", Tstr "/info/langs/rust"
-                                    ]
-                                ; Tobj
-                                    [ "name", Tstr "ocaml/ocaml-plain-wordmark"
-                                    ; "alt_name", Tstr "Ocaml"
-                                    ; "click", Tstr "/info/langs/ocaml"
-                                    ]
-                                ] )
+                      [ knowledge
+                          "Programming languages"
+                          [ icon "rust/rust-plain" "Rust"
+                            @@ click "https://rust-lang.org" "langs/rust" "Rust"
+                          ; icon "ocaml/ocaml-plain-wordmark" "OCaml"
+                            @@ click "https://ocaml.org" "langs/ocaml" "OCaml"
+                          ; Link "https://haskell.org"
+                            |> icon "haskell/haskell-original" "Haskell"
                           ]
-                      ; Tobj
-                          [ "name", Tstr "Tools"
-                          ; ( "icons"
-                            , Tlist
-                                [ Tobj
-                                    [ "name", Tstr "git/git-original"
-                                    ; "alt_name", Tstr "Git"
-                                    ; "link", Tstr "https://git-scm.com/"
-                                    ]
-                                ; Tobj
-                                    [ "path", Tstr "./static/"
-                                    ; "name", Tstr "neovim"
-                                    ; "alt_name", Tstr "Neovim"
-                                    ; "click", Tstr "/info/tools/neovim"
-                                    ]
-                                ; Tobj
-                                    [ "name", Tstr "docker/docker-original-wordmark"
-                                    ; "alt_name", Tstr "Docker"
-                                    ; "link", Tstr "https://www.docker.com/"
-                                    ]
-                                ] )
+                      ; knowledge
+                          "Tools"
+                          [ Link "https://git-scm.com/" |> icon "git/git-original" "Git"
+                          ; icon ~path:"./static/" "neovim" "Neovim"
+                            @@ click "https://neovim.io" "tools/neovim" "Neovim"
+                          ; Link "https://docker.com"
+                            |> icon "docker/docker-original-wordmark" "Docker"
+                          ; icon "nixos/nixos-original" "NixOS"
+                            @@ click "https://nixos.org" "tools/nixos" "NixOS"
+                          ]
+                      ; knowledge
+                          "Frameworks"
+                          [ Link "https://tailwindcss.com"
+                            |> icon "tailwindcss/tailwindcss-plain" "Tailwind"
                           ]
                       ] )
                 ])
-       ; (let path = "info/langs/ocaml" in
-          Dream.get path (fun _ ->
-            Dream.html @@ Personal_site.template_to_html path []))
-       ; (let path = "info/langs/rust" in
-          Dream.get path (fun _ ->
-            Dream.html @@ Personal_site.template_to_html path []))
-       ; (let path = "info/tools/neovim" in
-          Dream.get path (fun _ ->
-            Dream.html @@ Personal_site.template_to_html path []))
        ]
 ;;

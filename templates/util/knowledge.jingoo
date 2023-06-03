@@ -2,43 +2,41 @@
     <div class="flex gap-5px justify-center">
         {% for icon in icons %}
             {%- if icon.click %}
-                <button _="on click send clickety(clicker : '{{ icon.name }}') to next .info"
-                        hx-get="{{ icon.click }}" hx-target="next .info">
+                <button
             {% else %}
-                <a href="{{ icon.link }}">
-            {% endif -%}
-
-                <img class="bg-my-white rounded-md aspect-square p-5px min-w-[3.5rem] hover:bg-my-purple"
+                <a href="{{ icon.link }}"
+            {% endif %}
+                class="bg-my-white rounded-md border-2 border-my-black hover:bg-gradient-to-br hover:to-my-purple hover:from-my-red">
+                <img class="aspect-square p-5px min-w-[3.5rem]"
                      src="{{ default('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/', icon.path) }}{{ icon.name }}.svg"
                      alt="{{ icon.alt_name }} icon"/>
 
             {%- if icon.click %}
                 </button>
+                <div _="on click halt the event unless event.target is a HTMLAnchorElement
+                        on click(event) from the previous <button/>
+                            halt the event
+                            if me.classList.contains('hidden')
+                                add .hidden to .info
+                                remove .hidden from me
+                            else
+                                add .hidden to me"
+                    class="hidden absolute bg-my-light-gray text-my-white p-5px translate-y-[69px] translate-x-2.5 rounded-md info">
+                {% autoescape false %}
+                {{ icon.click }}
+                {% endautoescape %}
+                </div>
             {% else %}
                 </a>
             {% endif -%}
         {% endfor %}
     </div>
-    <div _="init set :last to '' then set :addhide to false
-            on htmx:afterSwap
-                if not :addhide
-                    remove .hidden from me
-                else
-                    set :addhide to false end
-            on clickety(clicker)
-                if :last is clicker
-                    set :addhide to true
-                    add .hidden to me
-                    set :last to ''
-                else
-                    set :last to clicker"
-        class="hidden min-w-max p-5px bg-my-gray rounded-md info"></div>
 {%- endmacro %}
 
-<div class="flex inset-x-0 mx-auto justify-center">
+<div class="flex flex-wrap justify-center">
     {% for knowledge in knowledges %}
-        <div class="bg-my-gray m-5px p-5px w-fit h-fit rounded-md">
-            <h2 class="text-center font-bold text-3xl text-my-purple">{{ knowledge.name }}</h2>
+        <div class="border-2 border-my-black dark:border-my-white bg-gradient-to-br from-my-light-blue to-my-blue m-5px p-5px w-fit h-fit rounded-md">
+            <h2 class="text-center font-bold text-3xl text-my-black">{{ knowledge.name }}</h2>
             {{ build(knowledge.icons) }}
         </div>
     {% endfor %}

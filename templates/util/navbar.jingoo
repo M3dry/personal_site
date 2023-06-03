@@ -1,6 +1,18 @@
-<div class="text-right font-2xl my-2.5 mx-5px">
-    {% for link in links %}
-    <a class="no-underline font-bold text-my-white p-5px hover:bg-my-purple hover:rounded-md hover:text-my-black" href="{{ link.path }}"
-        title="{{ link.title }}">{{ link.name }}</a>
-    {% endfor %}
+<div>
+    <button _="on click
+                    toggle .dark on <html/> 
+                    log (my innerHTML is 'Dark mode')
+                    if my innerHTML is 'Dark mode'
+                        set my innerHTML to 'Light mode'
+                    else
+                        set my innerHTML to 'Dark mode'
+                    halt the event"
+            class="navbar-link py-0 px-1 my-2.5 mx-5px text-left inline-block">
+        Light mode
+    </button>
+    <div class="my-2.5 mx-5px text-right inline-block float-right">
+        {% for link in links %}
+        <a class="navbar-link" href="{{ link.path }}">{{ link.name }}</a>
+        {% endfor %}
+    </div>
 </div>
