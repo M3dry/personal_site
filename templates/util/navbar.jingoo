@@ -1,16 +1,16 @@
 <div>
     <button _="on click
-                    toggle .dark on <html/> 
-                    log (my innerHTML is 'Dark mode')
+                    halt the event
+                    toggle .dark on <html/>
                     if my innerHTML is 'Dark mode'
                         set my innerHTML to 'Light mode'
                     else
-                        set my innerHTML to 'Dark mode'
-                    halt the event"
-            class="navbar-link py-0 px-1 my-2.5 mx-5px text-left inline-block">
+                        set my innerHTML to 'Dark mode'"
+            class="navbar-link py-0 px-1 my-2.5 mx-5px">
         Light mode
     </button>
     <div class="my-2.5 mx-5px text-right inline-block float-right">
+        <button _="on click go to the top of #knowledge" class="navbar-link py-0">Skills</button>
         {% for link in links %}
         <a class="navbar-link" href="{{ link.path }}">{{ link.name }}</a>
         {% endfor %}

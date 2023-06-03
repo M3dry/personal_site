@@ -1,7 +1,9 @@
+const plugin = require('tailwindcss/plugin')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: ["./templates/**/*.{jingoo, html}"],
-    darkMode: 'class',
+    darkMode: "class",
     theme: {
         fontFamily: {
             ubuntu: ["Ubuntu Nerd Font"],
@@ -26,5 +28,4 @@ module.exports = {
             },
         },
     },
-    plugins: [],
 };
