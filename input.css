@@ -14,6 +14,6 @@
     }
 
     .skill-heading {
-        @apply navbar-link text-xl text-my-blue
+        @apply navbar-link text-xl
     }
 }

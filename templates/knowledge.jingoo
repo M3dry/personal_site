@@ -1,0 +1,51 @@
+{% macro build(icons, cols) -%}
+        <div class="grid gap-5px content-center justify-center" style="grid-template-columns: repeat({{ cols }}, minmax(0, 1fr))">
+        {% for icon in icons %}
+            {%- if icon.click %}
+                <div class="m-0 p-0 h-[56px]">
+                    <button
+            {% else %}
+                <a href="{{ icon.link }}"
+            {% endif %}
+                class="aspect-square w-[3.5rem] bg-my-white rounded-md border-2 border-my-black hover:bg-gradient-to-tl hover:from-yellow-400 hover:to-rose-600">
+                <img class="aspect-square p-5px"
+                     decoding="async"
+                     src="{{ default('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/', icon.path) }}{{ icon.name }}.svg"
+                     alt="{{ icon.alt_name }} icon"/>
+
+            {%- if icon.click %}
+                    </button>
+                    <div _="on click halt the event unless event.target is a HTMLAnchorElement
+                            on click(event) from the previous <button/>
+                                halt the event
+                                if me.classList.contains('hidden')
+                                    add .hidden to .info
+                                    remove .hidden from me
+                                else
+                                    add .hidden to me"
+                        class="hidden absolute rounded-md border-2 border-my-black dark:border-my-white bg-gradient-to-tl from-yellow-400 to-rose-600 p-5px translate-y-[10px] translate-x-[-70px] min-w-[20rem] max-w-xs info">
+                    {% autoescape false %}
+                    {{ icon.click }}
+                    {% endautoescape %}
+                    </div>
+                </div>
+            {% else %}
+                </a>
+            {% endif -%}
+        {% endfor %}
+    </div>
+{%- endmacro %}
+
+<div id="knowledge" class="flex justify-center">
+    <div class="w-11/12">
+        <h1 class="text-6xl font-bold text-center">Skills</h1>
+        <div class="flex flex-wrap justify-center">
+            {% for knowledge in knowledges %}
+                <div class="border-2 border-my-black dark:border-my-white bg-gradient-to-br from-sky-300 to-blue-500 m-5px p-5px w-fit h-fit rounded-md">
+                    <h2 class="text-center font-bold text-3xl">{{ knowledge.name }}</h2>
+                    {{ build(knowledge.icons, knowledge.cols) }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

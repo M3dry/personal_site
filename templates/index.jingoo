@@ -1,6 +1,7 @@
 {% extends "./templates/base.jingoo" %}
 
 {% block main %}
-{% include "./templates/util/navbar.jingoo" %}
-{% include "./templates/util/knowledge.jingoo" %}
+{% include "./templates/navbar.jingoo" %}
+{% include "./templates/knowledge.jingoo" %}
+{% include "./templates/socials.jingoo" %}
 {% endblock %}

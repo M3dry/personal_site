@@ -3,9 +3,9 @@ let link name path =
   Tobj [ "name", Tstr name; "path", Tstr path ]
 ;;
 
-let knowledge name icons =
+let knowledge name cols icons =
   let open Jingoo.Jg_types in
-  Tobj [ "name", Tstr name; "icons", Tlist icons ]
+  Tobj [ "name", Tstr name; "icons", Tlist icons; "cols", Tint cols ]
 ;;
 
 type icon_behaviour =
@@ -43,7 +43,7 @@ let icon ?path name alt_name behaviour =
 ;;
 
 let () =
-  Dream.run
+  Dream.run ~interface:"0.0.0.0"
   @@ Dream.logger
   @@ Dream.router
        [ Dream.get "/static/**" @@ Dream.static "./static/"
@@ -61,27 +61,47 @@ let () =
                   , Tlist
                       [ knowledge
                           "Programming languages"
+                          6
                           [ icon "rust/rust-plain" "Rust"
                             @@ click "https://rust-lang.org" "langs/rust" "Rust"
                           ; icon "ocaml/ocaml-plain-wordmark" "OCaml"
                             @@ click "https://ocaml.org" "langs/ocaml" "OCaml"
                           ; Link "https://haskell.org"
                             |> icon "haskell/haskell-original" "Haskell"
+                          ; Link "https://go.dev" |> icon ~path:"./static/" "go" "Go"
+                          ; Link "https://lua.org" |> icon ~path:"./static/" "lua" "Lua"
+                          ; Link "https://gcc.gnu.org" |> icon "c/c-line" "C"
+                          ; Link "https://ziglang.org" |> icon "zig/zig-original" "Zig"
+                          ; Link "https://javascript.com"
+                            |> icon ~path:"./static/" "javascript" "Javascript"
+                          ; Link "https://typescriptlang.org/"
+                            |> icon ~path:"./static/" "typescript" "Typescript"
+                          ; Link "https://gnu.org/software/bash/"
+                            |> icon "/bash/bash-plain" "Bash"
                           ]
                       ; knowledge
                           "Tools"
-                          [ Link "https://git-scm.com/" |> icon "git/git-original" "Git"
+                          3
+                          [ Link "https://git-scm.com/"
+                            |> icon ~path:"./static/" "git" "Git"
                           ; icon ~path:"./static/" "neovim" "Neovim"
                             @@ click "https://neovim.io" "tools/neovim" "Neovim"
-                          ; Link "https://docker.com"
-                            |> icon "docker/docker-original-wordmark" "Docker"
+                          ; Link "https://emacs.org"
+                            |> icon ~path:"./static/" "emacs" "Emacs"
+                          ; Link "https://linux.org"
+                            |> icon "linux/linux-original" "Linux"
                           ; icon "nixos/nixos-original" "NixOS"
                             @@ click "https://nixos.org" "tools/nixos" "NixOS"
+                          ; Link "https://docker.com"
+                            |> icon "docker/docker-original-wordmark" "Docker"
                           ]
                       ; knowledge
                           "Frameworks"
+                          4
                           [ Link "https://tailwindcss.com"
                             |> icon "tailwindcss/tailwindcss-plain" "Tailwind"
+                          ; Link "https://svelte.dev"
+                            |> icon "svelte/svelte-plain" "Svelte"
                           ]
                       ] )
                 ])
